@@ -147,7 +147,7 @@ test('Vercel preserves known deep links, removes bot-specific output, and leaves
 
   assert.equal(config.cleanUrls, true);
   assert.equal(config.trailingSlash, false);
-  assert.equal(rewrites.get('/api/:path*'), 'https://api.connect2code.in/api/:path*');
+  assert.equal(rewrites.get('/api/:path*'), 'https://codingplatform-tdt0.onrender.com/api/:path*');
   ['/problems/:slug', '/companies/:slug', '/companies/:companyId/exams/:examId', '/oauth/callback', '/admin/:path*']
     .forEach((path) => assert.equal(rewrites.get(path), '/app', `${path} must use the noindex app shell`));
   assert.ok(!config.rewrites.some((rule) => rule.source === '/(.*)' || rule.source === '/:path*'));

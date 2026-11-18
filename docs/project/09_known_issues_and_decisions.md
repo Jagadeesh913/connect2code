@@ -305,7 +305,7 @@
 
 ### Decision 29: Phase 1 boundary hardening and cache supersession (2026-11-07)
 
-- **Network authority**: Production API and OAuth destinations are pinned to `https://api.connect2code.in`; build-time configuration cannot redirect authenticated traffic to an arbitrary origin. Development/preview overrides remain available only in local mode.
+- **Network authority**: Production API and OAuth destinations are pinned to `https://codingplatform-tdt0.onrender.com`; build-time configuration cannot redirect authenticated traffic to an arbitrary origin. Development/preview overrides remain available only in local mode.
 - **Account isolation**: User-scoped storage now versions and encodes the complete canonical identity instead of truncating it to a collision-prone 32-bit FNV value. Legacy hash keys are not read into the new scope because doing so could reintroduce collision data.
 - **Untrusted DTOs and errors**: Error messages/status codes are type-guarded before string operations. MCQ pages/details and company exam/role/section payloads are mapped before rendering, and text company routes reject catalog records without a numeric backend ID instead of recursively reloading the catalog.
 - **Request ownership**: Reference/language invalidation clears stale request ownership and forced refreshes can supersede in-flight reads. Admin question/MCQ detail controllers now reach the transport. Company practice data is lazy by selected tab; the admin company modal loads only its active tab, cancels on switch/close, and reads exam pages sequentially rather than with unbounded fan-out. Admin Questions owns one abortable company catalog request and passes that result into its form instead of downloading the same catalog again when the modal opens.

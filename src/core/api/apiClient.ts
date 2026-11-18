@@ -40,10 +40,10 @@ function deleteRequestHeader(headers: HeaderContainer, name: string): void {
  * - Supports relative API base paths (e.g. '/api/v1') to enable Vite development proxying.
  * - Normalizes relative paths without a leading slash (e.g. 'api/v1' -> '/api/v1').
  * - Handles missing, empty, or invalid configuration safely and clearly by defaulting
- *   to production 'https://api.connect2code.in/api/v1'.
+ *   to production 'https://codingplatform-tdt0.onrender.com/api/v1'.
  */
-export const BACKEND_ORIGIN = 'https://api.connect2code.in';
-export const DEFAULT_API_BASE_URL = 'https://api.connect2code.in/api/v1';
+export const BACKEND_ORIGIN = 'https://codingplatform-tdt0.onrender.com';
+export const DEFAULT_API_BASE_URL = 'https://codingplatform-tdt0.onrender.com/api/v1';
 
 export const resolveApiBaseUrl = (rawUrl?: string | null): string => {
   if (typeof rawUrl !== 'string') {

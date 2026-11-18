@@ -82,7 +82,7 @@ flowchart TD
 
 ## 4. Architectural Rules That Must Never Be Broken
 
-- **API Domain**: The production API domain is strictly `https://api.connect2code.in/api/v1`. Never use `.com` or the legacy Render domain.
+- **API Domain**: The production API domain is strictly `https://codingplatform-tdt0.onrender.com/api/v1`.
 - **Token Contract**: The Spring Boot backend authenticates with `Authorization: Bearer <token>`. Request bodies and query parameters must not contain `jwtToken`, `token`, `jwttoken`, or `jwt_token`; `apiClient.ts` strips legacy aliases centrally.
 - **MCQ Option Correctness**: In MCQ authoring and practice, correctness is determined strictly by the `isCorrect: true/false` property on individual options in `options[]`. Never rely solely on top-level `correctOption` or `correctAnswer` strings, which may be stale.
 - **Logo Policy**: All company and brand logos are bundled locally in `public/companies/` and registered in [`src/features/companies/utils/companyLogoRegistry.ts`](src/features/companies/utils/companyLogoRegistry.ts). Never replace them with generic external placeholders.

@@ -2,7 +2,7 @@
 
 **Date**: November 3, 2026  
 **Audited Target**: Connect2Code (`c2c`) Frontend SPA (React 19, TypeScript 5.9, Vite 8, Tailwind v4, Redux Toolkit)  
-**Backend Target**: Java Spring Boot REST API (`https://api.connect2code.in/api/v1`)  
+**Backend Target**: Java Spring Boot REST API (`https://codingplatform-tdt0.onrender.com/api/v1`)  
 **Audit Engine**: CodeRabbit CLI (`coderabbit review --agent`) & Deep Contextual Static Analysis  
 
 ---

@@ -3,12 +3,11 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 
+import { cloudflare } from "@cloudflare/vite-plugin";
+
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss()
-  ],
+  plugins: [react(), tailwindcss(), cloudflare()],
   resolve: {
     alias: {
       '@': path.resolve(import.meta.dirname, './src')
@@ -18,26 +17,26 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: process.env.VITE_PROXY_TARGET || 'https://api.connect2code.in',
+        target: process.env.VITE_PROXY_TARGET || 'https://codingplatform-tdt0.onrender.com',
         changeOrigin: true,
         headers: {
-          Origin: process.env.VITE_PROXY_TARGET || 'https://api.connect2code.in',
+          Origin: process.env.VITE_PROXY_TARGET || 'https://codingplatform-tdt0.onrender.com',
         },
         configure: (proxy) => {
           proxy.on('proxyReq', (proxyReq) => {
-            proxyReq.setHeader('Origin', process.env.VITE_PROXY_TARGET || 'https://api.connect2code.in');
+            proxyReq.setHeader('Origin', process.env.VITE_PROXY_TARGET || 'https://codingplatform-tdt0.onrender.com');
           });
         },
       },
       '/oauth2': {
-        target: process.env.VITE_PROXY_TARGET || 'https://api.connect2code.in',
+        target: process.env.VITE_PROXY_TARGET || 'https://codingplatform-tdt0.onrender.com',
         changeOrigin: true,
         headers: {
-          Origin: process.env.VITE_PROXY_TARGET || 'https://api.connect2code.in',
+          Origin: process.env.VITE_PROXY_TARGET || 'https://codingplatform-tdt0.onrender.com',
         },
         configure: (proxy) => {
           proxy.on('proxyReq', (proxyReq) => {
-            proxyReq.setHeader('Origin', process.env.VITE_PROXY_TARGET || 'https://api.connect2code.in');
+            proxyReq.setHeader('Origin', process.env.VITE_PROXY_TARGET || 'https://codingplatform-tdt0.onrender.com');
           });
         },
       }
@@ -47,26 +46,26 @@ export default defineConfig({
     port: 4173,
     proxy: {
       '/api': {
-        target: process.env.VITE_PROXY_TARGET || 'https://api.connect2code.in',
+        target: process.env.VITE_PROXY_TARGET || 'https://codingplatform-tdt0.onrender.com',
         changeOrigin: true,
         headers: {
-          Origin: process.env.VITE_PROXY_TARGET || 'https://api.connect2code.in',
+          Origin: process.env.VITE_PROXY_TARGET || 'https://codingplatform-tdt0.onrender.com',
         },
         configure: (proxy) => {
           proxy.on('proxyReq', (proxyReq) => {
-            proxyReq.setHeader('Origin', process.env.VITE_PROXY_TARGET || 'https://api.connect2code.in');
+            proxyReq.setHeader('Origin', process.env.VITE_PROXY_TARGET || 'https://codingplatform-tdt0.onrender.com');
           });
         },
       },
       '/oauth2': {
-        target: process.env.VITE_PROXY_TARGET || 'https://api.connect2code.in',
+        target: process.env.VITE_PROXY_TARGET || 'https://codingplatform-tdt0.onrender.com',
         changeOrigin: true,
         headers: {
-          Origin: process.env.VITE_PROXY_TARGET || 'https://api.connect2code.in',
+          Origin: process.env.VITE_PROXY_TARGET || 'https://codingplatform-tdt0.onrender.com',
         },
         configure: (proxy) => {
           proxy.on('proxyReq', (proxyReq) => {
-            proxyReq.setHeader('Origin', process.env.VITE_PROXY_TARGET || 'https://api.connect2code.in');
+            proxyReq.setHeader('Origin', process.env.VITE_PROXY_TARGET || 'https://codingplatform-tdt0.onrender.com');
           });
         },
       }

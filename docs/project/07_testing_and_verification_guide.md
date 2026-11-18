@@ -11,7 +11,7 @@ Connect2Code implements a multi-tiered, production-grade verification strategy:
    - Chromium-driven end-to-end browser tests verifying landing page rendering, brand assets, SPA navigation, and 404 error boundaries against live preview servers.
    - Configured via [`playwright.config.ts`](../../playwright.config.ts) and [`e2e/landing-and-navigation.spec.ts`](../../e2e/landing-and-navigation.spec.ts).
 3. **Newman API Contract Test Runner** (`npm run test:api`):
-   - Postman CLI collection runner executing real HTTP contract assertions against the live backend (`https://api.connect2code.in/api/v1`).
+   - Postman CLI collection runner executing real HTTP contract assertions against the live backend (`https://codingplatform-tdt0.onrender.com/api/v1`).
    - Defined in [`postman/connect2code-api-contracts.postman_collection.json`](../../postman/connect2code-api-contracts.postman_collection.json).
 4. **Node.js Regression Test Runner** (`npm test`):
    - Native `node:test` regression runner executing 438 deep contract tests across 25 suites in `scripts/tests/`.

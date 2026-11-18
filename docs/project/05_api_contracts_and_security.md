@@ -2,8 +2,8 @@
 
 ## 1. Backend Origin & Base URL Resolution
 
-- **Production API Origin**: `https://api.connect2code.in`
-- **Canonical API Base URL**: `https://api.connect2code.in/api/v1`
+- **Production API Origin**: `https://codingplatform-tdt0.onrender.com`
+- **Canonical API Base URL**: `https://codingplatform-tdt0.onrender.com/api/v1`
 - **Production origin pin**: Deployed builds accept only the exact canonical HTTPS base above. Relative, localhost, staging, arbitrary HTTPS, and insecure HTTP environment values fall back to the canonical base; Google OAuth navigation is derived from that already-validated base. Local development/preview may still use the documented proxy or explicit development target.
 - **Base URL Resolution Logic** ([`src/core/api/apiClient.ts`](../../src/core/api/apiClient.ts)):
   ```ts
@@ -16,7 +16,7 @@
 
     // In deployed production: guard against localhost/relative paths and fallback to canonical backend
     if (resolved.includes('localhost') || resolved.includes('127.0.0.1') || !resolved.startsWith('http')) {
-      return DEFAULT_API_BASE_URL; // 'https://api.connect2code.in/api/v1'
+      return DEFAULT_API_BASE_URL; // 'https://codingplatform-tdt0.onrender.com/api/v1'
     }
     return resolved;
   };

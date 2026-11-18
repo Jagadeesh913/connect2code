@@ -32,23 +32,23 @@ The platform backend is a Java Spring Boot REST API service connected to a remot
 
 - **Production API Origin:**
   ```text
-  https://api.connect2code.in
+  https://codingplatform-tdt0.onrender.com
   ```
 - **Production REST Base URL:**
   ```text
-  https://api.connect2code.in/api/v1
+  https://codingplatform-tdt0.onrender.com/api/v1
   ```
 - **Local Development / Proxy Path:**
   ```text
   /api/v1
   ```
-  In local development, requests targeting `/api/v1` are proxied by Vite (`vite.config.ts`) to the backend origin `https://api.connect2code.in` to prevent CORS issues during browser debugging.
+  In local development, requests targeting `/api/v1` are proxied by Vite (`vite.config.ts`) to the backend origin `https://codingplatform-tdt0.onrender.com` to prevent CORS issues during browser debugging.
 
 ### Environment Variable Contract
 
 The frontend API client (`src/core/api/apiClient.ts`) resolves the base URL according to the following precedence:
-1. `import.meta.env.VITE_API_BASE_URL` (configured as `https://api.connect2code.in/api/v1`).
-2. If `VITE_API_BASE_URL` is empty, invalid, or specifies localhost, it automatically defaults to `https://api.connect2code.in/api/v1`.
+1. `import.meta.env.VITE_API_BASE_URL` (configured as `https://codingplatform-tdt0.onrender.com/api/v1`).
+2. If `VITE_API_BASE_URL` is empty, invalid, or specifies localhost, it automatically defaults to `https://codingplatform-tdt0.onrender.com/api/v1`.
 
 > [!NOTE]
 > **Backend Cold-Start Latency**: Initial requests after a dormant backend period can take 30–60 seconds while the container awakens. All automated scripts and clients configure timeouts of 60–120 seconds to prevent premature timeout aborts.

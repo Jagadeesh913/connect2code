@@ -144,7 +144,7 @@ describe('Backend-owned refresh-cookie authentication contract', () => {
     await Promise.resolve();
 
     assert.equal(axiosModule.postCalls.length, 1);
-    assert.equal(axiosModule.postCalls[0][0], 'https://api.connect2code.in/api/v1/auth/refresh');
+    assert.equal(axiosModule.postCalls[0][0], 'https://codingplatform-tdt0.onrender.com/api/v1/auth/refresh');
     assert.equal(axiosModule.postCalls[0][1], undefined, 'Refresh token must not be sent in the body');
     assert.equal(axiosModule.postCalls[0][2].withCredentials, true);
 
@@ -399,7 +399,7 @@ describe('Backend-owned refresh-cookie authentication contract', () => {
       message: 'Unauthorized',
     });
     assert.equal(axiosModule.postCalls.length, 1, 'Protected institution 401 must attempt one refresh');
-    assert.equal(axiosModule.postCalls[0][0], 'https://api.connect2code.in/api/v1/auth/refresh');
+    assert.equal(axiosModule.postCalls[0][0], 'https://codingplatform-tdt0.onrender.com/api/v1/auth/refresh');
     assert.equal(failedInstitutionRequest.headers.Authorization, 'Bearer refreshed-token');
 
     axiosModule.resetPostCalls();

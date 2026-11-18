@@ -124,21 +124,21 @@ describe('BATCH-1: Network Transport & API Client Base URL Resolution (F-005, F-
 
   it('defaults to production backend URL when env variable is unconfigured (undefined)', () => {
     const result = resolveApiBaseUrl(undefined);
-    assert.equal(result, 'https://api.connect2code.in/api/v1');
+    assert.equal(result, 'https://codingplatform-tdt0.onrender.com/api/v1');
   });
 
   it('empty or whitespace-only env variable defaults to production backend URL', () => {
-    assert.equal(resolveApiBaseUrl(''), 'https://api.connect2code.in/api/v1');
-    assert.equal(resolveApiBaseUrl('   '), 'https://api.connect2code.in/api/v1');
+    assert.equal(resolveApiBaseUrl(''), 'https://codingplatform-tdt0.onrender.com/api/v1');
+    assert.equal(resolveApiBaseUrl('   '), 'https://codingplatform-tdt0.onrender.com/api/v1');
   });
 
   it('invalid protocol safely falls back to production backend URL', () => {
     const result = resolveApiBaseUrl('ftp://invalid-server/api');
-    assert.equal(result, 'https://api.connect2code.in/api/v1');
+    assert.equal(result, 'https://codingplatform-tdt0.onrender.com/api/v1');
   });
 
   it('exported BASE_URL defaults to production backend URL in test/unconfigured environment', () => {
-    assert.equal(BASE_URL, 'https://api.connect2code.in/api/v1');
+    assert.equal(BASE_URL, 'https://codingplatform-tdt0.onrender.com/api/v1');
   });
 
   describe('Deployed / Development Environment URL Guarantees', () => {
@@ -170,9 +170,9 @@ describe('BATCH-1: Network Transport & API Client Base URL Resolution (F-005, F-
       });
 
       it('safely defaults to production backend when unconfigured in local mode', () => {
-        assert.equal(resolveDeploymentApiBaseUrl(undefined, true), 'https://api.connect2code.in/api/v1');
-        assert.equal(resolveDeploymentApiBaseUrl('', true), 'https://api.connect2code.in/api/v1');
-        assert.equal(resolveDeploymentApiBaseUrl('   ', true), 'https://api.connect2code.in/api/v1');
+        assert.equal(resolveDeploymentApiBaseUrl(undefined, true), 'https://codingplatform-tdt0.onrender.com/api/v1');
+        assert.equal(resolveDeploymentApiBaseUrl('', true), 'https://codingplatform-tdt0.onrender.com/api/v1');
+        assert.equal(resolveDeploymentApiBaseUrl('   ', true), 'https://codingplatform-tdt0.onrender.com/api/v1');
       });
     });
 
@@ -180,64 +180,64 @@ describe('BATCH-1: Network Transport & API Client Base URL Resolution (F-005, F-
       it('strictly rejects localhost and loopback targets in production', () => {
         assert.equal(
           resolveDeploymentApiBaseUrl('http://localhost:8080/api/v1', false),
-          'https://api.connect2code.in/api/v1'
+          'https://codingplatform-tdt0.onrender.com/api/v1'
         );
         assert.equal(
           resolveDeploymentApiBaseUrl('http://127.0.0.1:8080/api/v1', false),
-          'https://api.connect2code.in/api/v1'
+          'https://codingplatform-tdt0.onrender.com/api/v1'
         );
         assert.equal(
           resolveDeploymentApiBaseUrl('http://localhost:3000', false),
-          'https://api.connect2code.in/api/v1'
+          'https://codingplatform-tdt0.onrender.com/api/v1'
         );
       });
 
       it('strictly falls back to live backend if relative URL is passed in deployed production', () => {
         assert.equal(
           resolveDeploymentApiBaseUrl('/api/v1', false),
-          'https://api.connect2code.in/api/v1'
+          'https://codingplatform-tdt0.onrender.com/api/v1'
         );
         assert.equal(
           resolveDeploymentApiBaseUrl('api/v1', false),
-          'https://api.connect2code.in/api/v1'
+          'https://codingplatform-tdt0.onrender.com/api/v1'
         );
       });
 
       it('defaults to live backend when env variable is unconfigured in deployed production', () => {
         assert.equal(
           resolveDeploymentApiBaseUrl(undefined, false),
-          'https://api.connect2code.in/api/v1'
+          'https://codingplatform-tdt0.onrender.com/api/v1'
         );
         assert.equal(
           resolveDeploymentApiBaseUrl('', false),
-          'https://api.connect2code.in/api/v1'
+          'https://codingplatform-tdt0.onrender.com/api/v1'
         );
       });
 
       it('allows only the canonical production API base in deployed production', () => {
         assert.equal(
-          resolveDeploymentApiBaseUrl('https://api.connect2code.in/api/v1', false),
-          'https://api.connect2code.in/api/v1'
+          resolveDeploymentApiBaseUrl('https://codingplatform-tdt0.onrender.com/api/v1', false),
+          'https://codingplatform-tdt0.onrender.com/api/v1'
         );
         assert.equal(
           resolveDeploymentApiBaseUrl('https://staging.connect2code.in/api/v1', false),
-          'https://api.connect2code.in/api/v1'
+          'https://codingplatform-tdt0.onrender.com/api/v1'
         );
         assert.equal(
           resolveDeploymentApiBaseUrl('https://attacker.example/api/v1', false),
-          'https://api.connect2code.in/api/v1'
+          'https://codingplatform-tdt0.onrender.com/api/v1'
         );
         assert.equal(
-          resolveDeploymentApiBaseUrl('http://api.connect2code.in/api/v1', false),
-          'https://api.connect2code.in/api/v1'
+          resolveDeploymentApiBaseUrl('http://codingplatform-tdt0.onrender.com/api/v1', false),
+          'https://codingplatform-tdt0.onrender.com/api/v1'
         );
       });
     });
 
     describe('Backend Origin & OAuth URL Resolution', () => {
       it('resolves production backend origin for relative proxy paths and default fallback', () => {
-        assert.equal(getBackendOrigin('/api/v1'), 'https://api.connect2code.in');
-        assert.equal(getBackendOrigin(undefined), 'https://api.connect2code.in');
+        assert.equal(getBackendOrigin('/api/v1'), 'https://codingplatform-tdt0.onrender.com');
+        assert.equal(getBackendOrigin(undefined), 'https://codingplatform-tdt0.onrender.com');
       });
 
       it('resolves local backend origin when targeting localhost', () => {
@@ -246,9 +246,9 @@ describe('BATCH-1: Network Transport & API Client Base URL Resolution (F-005, F-
       });
     });
 
-    it('REGRESSION: login request URL resolves to https://api.connect2code.in/api/v1/auth/login and preserves /api/v1 prefix exactly once', () => {
+    it('REGRESSION: login request URL resolves to https://codingplatform-tdt0.onrender.com/api/v1/auth/login and preserves /api/v1 prefix exactly once', () => {
       const loginUrl = apiClient.getUri({ url: '/auth/login' });
-      assert.equal(loginUrl, 'https://api.connect2code.in/api/v1/auth/login');
+      assert.equal(loginUrl, 'https://codingplatform-tdt0.onrender.com/api/v1/auth/login');
       assert.ok(!loginUrl.includes('/api/v1/api/v1'), 'Must not duplicate /api/v1 prefix');
       assert.ok(!loginUrl.includes('localhost'), 'Must not target localhost origin');
     });

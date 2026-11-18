@@ -69,7 +69,7 @@
     ],
     "validation_plan": {
       "local": "Verify that document.cookie cannot set HttpOnly and requires backend Set-Cookie response header.",
-      "deployment": "Inspect production Set-Cookie headers on https://api.connect2code.in/api/v1/auth/login to confirm if HttpOnly cookies are issued."
+      "deployment": "Inspect production Set-Cookie headers on https://codingplatform-tdt0.onrender.com/api/v1/auth/login to confirm if HttpOnly cookies are issued."
     }
   },
   {

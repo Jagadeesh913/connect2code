@@ -481,7 +481,7 @@ describe('shared UX interaction contracts', () => {
     assert.match(deploymentConfig, /Content-Security-Policy/);
     assert.match(deploymentConfig, /default-src 'self'/);
     assert.match(deploymentConfig, /script-src 'self'/);
-    assert.match(deploymentConfig, /connect-src 'self' https:\/\/api\.connect2code\.in/);
+    assert.match(deploymentConfig, /connect-src 'self' https:\/\/codingplatform-tdt0\.onrender\.com/);
     assert.match(deploymentConfig, /worker-src 'self' blob:/);
     assert.match(deploymentConfig, /frame-ancestors 'none'/);
     assert.match(deploymentConfig, /display-capture=\(\)/);

@@ -50,22 +50,22 @@ describe('PRODUCTION-GRADE GOOGLE OAUTH & AUTHENTICATION LIFECYCLE', () => {
   describe('1. Backend OAuth URL & Browser Navigation', () => {
     it('resolves correct Google OAuth endpoint relative to backend origin', () => {
       assert.equal(
-        getBackendOrigin('https://api.connect2code.in/api/v1'),
-        'https://api.connect2code.in'
+        getBackendOrigin('https://codingplatform-tdt0.onrender.com/api/v1'),
+        'https://codingplatform-tdt0.onrender.com'
       );
       assert.equal(
         getBackendOrigin('/api/v1'),
-        'https://api.connect2code.in'
+        'https://codingplatform-tdt0.onrender.com'
       );
       assert.equal(
         getBackendOrigin(undefined),
-        'https://api.connect2code.in'
+        'https://codingplatform-tdt0.onrender.com'
       );
     });
 
     it('generates exact Spring Security Google authorization endpoint without double slashes', () => {
       const url = getGoogleOAuthUrl();
-      assert.equal(url, 'https://api.connect2code.in/oauth2/authorization/google');
+      assert.equal(url, 'https://codingplatform-tdt0.onrender.com/oauth2/authorization/google');
     });
   });
 
@@ -471,7 +471,7 @@ describe('PRODUCTION-GRADE GOOGLE OAUTH & AUTHENTICATION LIFECYCLE', () => {
           headers: {
             Authorization: 'Bearer secret.jwt.access.token',
           },
-          url: 'https://api.connect2code.in/api/v1/auth/logout',
+          url: 'https://codingplatform-tdt0.onrender.com/api/v1/auth/logout',
         };
 
         // Execute sanitized logging pattern

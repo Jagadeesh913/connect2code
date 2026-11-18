@@ -17,7 +17,7 @@
   "variable": [
     {
       "key": "base_url",
-      "value": "https://api.connect2code.in/api/v1",
+      "value": "https://codingplatform-tdt0.onrender.com/api/v1",
       "type": "string"
     },
     {

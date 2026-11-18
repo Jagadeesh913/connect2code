@@ -20,7 +20,7 @@
 
 | Variable Name | Default / Production Value | Purpose |
 | :--- | :--- | :--- |
-| `VITE_API_BASE_URL` | `https://api.connect2code.in/api/v1` | Root API base URL targeting the remote Spring Boot backend. |
+| `VITE_API_BASE_URL` | `https://codingplatform-tdt0.onrender.com/api/v1` | Root API base URL targeting the remote Spring Boot backend. |
 | `VITE_APP_NAME` | `Connect 2 Code` | Platform application name display. |
 | `VITE_SITE_URL` | `https://www.connect2code.in` (required in Vercel Production) | Canonical frontend origin used by client metadata and build-generated pages. The apex redirects to `www`, so set the exact `www` HTTPS origin; never use a Vercel preview URL or include a path/trailing slash. |
 | `VITE_BRANDFETCH_CLIENT_ID` | Empty (optional) | Public Brandfetch client ID used for domain-derived company logos after bundled assets. When omitted, the cascade continues with Simple Icons, the official-site favicon, and a deterministic monogram. Never put a secret key in a `VITE_` variable. |
@@ -28,7 +28,7 @@
 
 > [!IMPORTANT]
 > **Production Environment Safeguard**:
-> In deployed production builds, `src/core/api/apiClient.ts` strictly rejects `localhost`, `127.0.0.1`, or relative paths without host, falling back to `https://api.connect2code.in/api/v1` to ensure static hosting resilience. In local development or preview mode, relative paths (e.g. `/api/v1` for the Vite proxy) and local development backends (e.g. `http://localhost:8080/api/v1`) are fully supported.
+> In deployed production builds, `src/core/api/apiClient.ts` strictly rejects `localhost`, `127.0.0.1`, or relative paths without host, falling back to `https://codingplatform-tdt0.onrender.com/api/v1` to ensure static hosting resilience. In local development or preview mode, relative paths (e.g. `/api/v1` for the Vite proxy) and local development backends (e.g. `http://localhost:8080/api/v1`) are fully supported.
 
 
 ---
@@ -48,24 +48,24 @@ server: {
   port: 5173,
   proxy: {
     '/api': {
-      target: 'https://api.connect2code.in',
+      target: 'https://codingplatform-tdt0.onrender.com',
       changeOrigin: true,
       secure: false,
-      headers: { Origin: 'https://api.connect2code.in' },
+      headers: { Origin: 'https://codingplatform-tdt0.onrender.com' },
       configure: (proxy) => {
         proxy.on('proxyReq', (proxyReq) => {
-          proxyReq.setHeader('Origin', 'https://api.connect2code.in');
+          proxyReq.setHeader('Origin', 'https://codingplatform-tdt0.onrender.com');
         });
       },
     },
     '/oauth2': {
-      target: 'https://api.connect2code.in',
+      target: 'https://codingplatform-tdt0.onrender.com',
       changeOrigin: true,
       secure: false,
-      headers: { Origin: 'https://api.connect2code.in' },
+      headers: { Origin: 'https://codingplatform-tdt0.onrender.com' },
       configure: (proxy) => {
         proxy.on('proxyReq', (proxyReq) => {
-          proxyReq.setHeader('Origin', 'https://api.connect2code.in');
+          proxyReq.setHeader('Origin', 'https://codingplatform-tdt0.onrender.com');
         });
       },
     }
@@ -87,19 +87,19 @@ Connect2Code is configured for deployment on Vercel or any SPA static web host.
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://api.connect2code.in/api/:path*"
+      "destination": "https://codingplatform-tdt0.onrender.com/api/:path*"
     },
     {
       "source": "/refresh",
-      "destination": "https://api.connect2code.in/api/v1/auth/refresh"
+      "destination": "https://codingplatform-tdt0.onrender.com/api/v1/auth/refresh"
     },
     {
       "source": "/auth/refresh",
-      "destination": "https://api.connect2code.in/api/v1/auth/refresh"
+      "destination": "https://codingplatform-tdt0.onrender.com/api/v1/auth/refresh"
     },
     {
       "source": "/oauth2/:path*",
-      "destination": "https://api.connect2code.in/oauth2/:path*"
+      "destination": "https://codingplatform-tdt0.onrender.com/oauth2/:path*"
     },
     {
       "source": "/problems/:slug",
@@ -110,13 +110,13 @@ Connect2Code is configured for deployment on Vercel or any SPA static web host.
 ```
 - **Public prerendering and hydration**: `npm run build` runs the client build and then [`scripts/generate-seo-assets.mjs`](../../scripts/generate-seo-assets.mjs). The generator creates a temporary bundled SSR entry from [`src/entry-server.tsx`](../../src/entry-server.tsx), renders the real React route tree for `/`, `/practice`, `/dsa-sheet`, `/companies`, and `/aptitude`, and injects it into roots marked `data-c2c-ssr="true"`. `src/main.tsx` hydrates only those roots; private shells keep an empty root and use client mounting. The homepage renders the existing `Landing` tree, while the four signed-out feature hubs and the generator share their concise factual registry. The build also emits `sitemap.xml`, `index.md`, `llms.txt`, `app.html`, and `404.html`. Browser and crawler output is identical and no User-Agent routing remains.
 - **Deep links and real 404s**: Static public hubs resolve through Vercel clean URLs. Every other valid React route is explicitly rewritten to the noindex `/app` shell. With no global SPA catch-all, any path outside the allowlist falls through to generated `404.html` and Vercel's HTTP 404 behavior. Keep the allowlist synchronized with `src/routes/appRoutes.tsx`.
-- **Edge proxy**: Rewrites `/api/*` and `/oauth2/*` directly to `https://api.connect2code.in`; refresh and OAuth callback paths retain their existing dedicated rules.
+- **Edge proxy**: Rewrites `/api/*` and `/oauth2/*` directly to `https://codingplatform-tdt0.onrender.com`; refresh and OAuth callback paths retain their existing dedicated rules.
 - **Canonical and social metadata**: All generated public documents contain the canonical `www` URL, absolute social image URLs, and route-specific WebPage JSON-LD before JavaScript loads. After React mounts, `RouteMetadata` continues to reconcile metadata on navigation using the pinned production origin.
 - **Indexing protection**: Route-specific `X-Robots-Tag` headers and the noindex app shell cover login, callback, authenticated, admin, authenticated API-backed detail, coming-soon, and error routes. Dynamic entity routes are intentionally absent from the sitemap because their current API contracts require authentication; a build must not receive user credentials or invent entity slugs.
 - **Browser hardening**: global deployment headers deny framing, object embedding, in-page display capture, camera/microphone/geolocation/payment/USB access, MIME sniffing, and insecure transport downgrade. `same-origin-allow-popups` is retained so the verified Google OAuth popup flow can continue to communicate with its opener.
 
 > [!IMPORTANT]
-> In Vercel Project Settings → Environment Variables, set `VITE_SITE_URL=https://www.connect2code.in` for **Production**. Keep `VITE_API_BASE_URL=https://api.connect2code.in/api/v1`. Redeploy only after the deployment owner reviews the build. The repository pins the same `www` value in `.env.production`, preventing preview request hosts or the redirecting apex from becoming canonical, but the Vercel Production variable remains required as an explicit provider contract.
+> In Vercel Project Settings → Environment Variables, set `VITE_SITE_URL=https://www.connect2code.in` for **Production**. Keep `VITE_API_BASE_URL=https://codingplatform-tdt0.onrender.com/api/v1`. Redeploy only after the deployment owner reviews the build. The repository pins the same `www` value in `.env.production`, preventing preview request hosts or the redirecting apex from becoming canonical, but the Vercel Production variable remains required as an explicit provider contract.
 
 The exact sitemap URL after deployment is `https://www.connect2code.in/sitemap.xml`. The build also generates homepage-equivalent `index.md` and `llms.txt` from the same public-route registry: these are optional discovery aids and do not affect Google Search indexing. Only `/` declares `/index.md` as a Markdown alternate; the other hubs do not advertise it because it is not their content-equivalent representation. The deployment owner must verify the apex domain assignment, HTTPS certificate, apex → `www` redirect, generated route statuses/headers, canonical tags, structured data, homepage Markdown response, `llms.txt`, and sitemap response from Vercel before adding the property to Google Search Console.
 
@@ -161,7 +161,7 @@ The final release-candidate Edge run exercised all five public documents at 1440
 ### Release and rollback checklist
 
 1. Build with the lockfile on Node 22 and require tests, typecheck, lint, architecture verification, documentation verification, and `npm run build` to pass from the exact candidate tree.
-2. Confirm Production variables keep `VITE_SITE_URL=https://www.connect2code.in` and `VITE_API_BASE_URL=https://api.connect2code.in/api/v1`; do not provide authentication credentials to the build.
+2. Confirm Production variables keep `VITE_SITE_URL=https://www.connect2code.in` and `VITE_API_BASE_URL=https://codingplatform-tdt0.onrender.com/api/v1`; do not provide authentication credentials to the build.
 3. Deploy an immutable Vercel preview first. Verify the five public SSR documents, `app.html` deep links, real 404 behavior, canonical/robots/schema tags, CSP/security headers, authentication restoration, and numeric-only company exam traffic before promoting the same artifact.
 4. After promotion, smoke-test `/`, `/practice`, `/dsa-sheet`, `/companies`, `/aptitude`, `/companies/tcs`, login, hard reload, refresh rotation, and logout. Confirm no hydration/React console error and no `/company/{slug}/exams/list` request.
 5. Retain the prior immutable Vercel deployment and its identifier until the observation window closes. No database migration or backend contract change is part of this frontend candidate.

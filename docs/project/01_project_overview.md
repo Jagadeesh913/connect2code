@@ -57,7 +57,7 @@ graph TB
     end
 
     subgraph Backend Cloud [Remote Infrastructure]
-        Gateway[Custom Domain: api.connect2code.in]
+        Gateway[Backend: codingplatform-tdt0.onrender.com]
         SpringBoot[Java Spring Boot REST API /api/v1]
         DB[(Relational Database: MySQL / PostgreSQL)]
         Judge0[Judge0 Code Execution Cluster]
@@ -72,8 +72,8 @@ graph TB
 ```
 
 ### Backend API Boundary
-- **Production API Origin**: `https://api.connect2code.in`
-- **API Base URL**: `https://api.connect2code.in/api/v1`
+- **Production API Origin**: `https://codingplatform-tdt0.onrender.com`
+- **API Base URL**: `https://codingplatform-tdt0.onrender.com/api/v1`
 - **Protocol**: HTTPS REST JSON APIs with Cookie and JWT Bearer authorization.
 - **Judge0 Engine**: Connected to the Spring Boot backend. The frontend never talks directly to Judge0; all compilation requests flow through `/api/v1/runCode` or `/api/v1/submitCode`.
 

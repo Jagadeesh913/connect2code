@@ -39,7 +39,7 @@ if (existsSync(join(root, 'vercel.json'))) {
     const vercelConfig = JSON.parse(readFileSync(join(root, 'vercel.json'), 'utf8'));
     const rewrites = Array.isArray(vercelConfig.rewrites) ? vercelConfig.rewrites : [];
     const rewriteMap = new Map(rewrites.map((rule) => [rule.source, rule.destination]));
-    if (rewriteMap.get('/api/:path*') !== 'https://api.connect2code.in/api/:path*') {
+    if (rewriteMap.get('/api/:path*') !== 'https://codingplatform-tdt0.onrender.com/api/:path*') {
       failures.push('vercel.json must preserve the production API proxy.');
     }
     if (rewriteMap.get('/problems/:slug') !== '/app' || rewriteMap.get('/admin/:path*') !== '/app') {
